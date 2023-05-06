@@ -64,12 +64,21 @@ class taskRepository {
     return tasks
   }
 
-  async getById(id) {
+  async getTaskById(id) {
     const result = await this.database.query(
       'SELECT * FROM tasks WHERE id = $1',
       [id]
     )
-    return result.rows[0]
+    return new Task(
+      result.rows[0]?.id,
+      result.rows[0]?.title,
+      result.rows[0]?.description,
+      result.rows[0]?.state,
+      result.rows[0]?.creationDate,
+      result.rows[0]?.priority,
+      result.rows[0]?.team,
+      result.rows[0]?.user
+    )
   }
 
   async create(task) {
@@ -85,20 +94,20 @@ class taskRepository {
       ]
     )
     return new Task(
-      result.rows[0].id,
-      result.rows[0].title,
-      result.rows[0].description,
-      result.rows[0].state,
-      result.rows[0].creationDate,
-      result.rows[0].priority,
-      result.rows[0].team,
-      result.rows[0].user
+      result.rows[0]?.id,
+      result.rows[0]?.title,
+      result.rows[0]?.description,
+      result.rows[0]?.state,
+      result.rows[0]?.creationDate,
+      result.rows[0]?.priority,
+      result.rows[0]?.team,
+      result.rows[0]?.user
     )
   }
 
-  async update(task) {
+  async updateTask(task) {
     const result = await this.database.query(
-      'UPDATE tasks SET title = $1, description = $2, state = $3, priority = $4, team = $5, user = $6 WHERE id = $7 RETURNING *',
+      'UPDATE tasks SET title = $1, description = $2, state = $3, priority = $4, teamId = $5, userId = $6 WHERE id = $7 RETURNING *',
       [
         task.title,
         task.description,
@@ -109,15 +118,35 @@ class taskRepository {
         task.id,
       ]
     )
-    return result.rows[0]
+
+    return new Task(
+      result.rows[0]?.id,
+      result.rows[0]?.title,
+      result.rows[0]?.description,
+      result.rows[0]?.state,
+      result.rows[0]?.creationDate,
+      result.rows[0]?.priority,
+      result.rows[0]?.team,
+      result.rows[0]?.user
+    )
   }
 
-  async delete(task) {
+  async deleteTask(id) {
     const result = await this.database.query(
       'DELETE FROM tasks WHERE id = $1 RETURNING *',
-      [task.id]
+      [id]
     )
-    return result.rows[0]
+
+    return new Task(
+      result.rows[0]?.id,
+      result.rows[0]?.title,
+      result.rows[0]?.description,
+      result.rows[0]?.state,
+      result.rows[0]?.creationDate,
+      result.rows[0]?.priority,
+      result.rows[0]?.team,
+      result.rows[0]?.user
+    )
   }
 }
 

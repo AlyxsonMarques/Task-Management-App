@@ -14,20 +14,7 @@ class UseCases {
   }
 
   async getTaskById(id) {
-    const result = await this.taskRepository.getTaskById(id)
-
-    const task = new Task(
-      result.id,
-      result.title,
-      result.description,
-      result.state,
-      result.creationDate,
-      result.priority,
-      result.team,
-      result.user
-    )
-
-    return task
+    return await this.taskRepository.getTaskById(id)
   }
 
   async createTask(title, description, state, priority, team, user) {
@@ -46,11 +33,11 @@ class UseCases {
     task.team = newTask.team || task.team
     task.user = newTask.user || task.user
 
-    await this.taskRepository.updateTask(task)
+    return await this.taskRepository.updateTask(task)
   }
 
-  async deleteTask(taskToDelete) {
-    await this.taskRepository.deleteTask(taskToDelete.id)
+  async deleteTask(id) {
+    return await this.taskRepository.deleteTask(id)
   }
 }
 

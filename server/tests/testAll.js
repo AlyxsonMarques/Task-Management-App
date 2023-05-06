@@ -14,17 +14,20 @@ const taskRepository = new TaskRepository(database)
 const taskManager = new UseCases(taskRepository)
 
 ;(async () => {
-  await taskManager.createAllTables()
-  const resultCreateTask = await taskManager.createTask(
-    'Teste',
-    'Desc',
+  // await taskManager.createAllTables()
+  await taskManager.createTask(
+    'teste',
+    'desc',
     'pending',
-    'low',
-    [1, 5, 6],
-    [2, 3, 4]
+    'high',
+    [2, 3],
+    [4, 5]
   )
-  const resultQueryTasks = await taskManager.getAllTasks()
+  // const resultSingleTasks = await taskManager.getTaskById(3)
+  const resultDeleteTask = await taskManager.deleteTask(4)
+  // const resultAllTasks = await taskManager.getAllTasks()
 
-  console.log(resultCreateTask)
-  console.log(resultQueryTasks)
+  // console.log(resultSingleTasks)
+  console.log(resultDeleteTask)
+  // console.log(resultAllTasks)
 })()
