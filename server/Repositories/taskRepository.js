@@ -8,23 +8,6 @@ class taskRepository {
   }
 
   async createAllTables() {
-    const resultUserTable = await this.database.query(
-      `CREATE TABLE IF NOT EXISTS users (
-      id SERIAL PRIMARY KEY NOT NULL, 
-      email VARCHAR(20) NOT NULL, 
-      password VARCHAR(20) NOT NULL
-    )`
-    )
-
-    const resultTeamTable = await this.database.query(
-      `CREATE TABLE IF NOT EXISTS teams (
-      id SERIAL PRIMARY KEY NOT NULL, 
-      name VARCHAR(20) NOT NULL, 
-      members INTEGER ARRAY NOT NULL, 
-      administrators INTEGER ARRAY NOT NULL
-    )`
-    )
-
     const resultTaskTable = await this.database.query(
       `CREATE TABLE IF NOT EXISTS tasks (
       id SERIAL PRIMARY KEY NOT NULL, 
@@ -39,11 +22,7 @@ class taskRepository {
       CONSTRAINT fk_user FOREIGN KEY(userId) REFERENCES users(id) ON DELETE SET NULL
     )`
     )
-    return {
-      resultUserTable,
-      resultTeamTable,
-      resultTaskTable,
-    }
+    return resultTaskTable
   }
 
   async getAll() {
@@ -81,7 +60,7 @@ class taskRepository {
     )
   }
 
-  async create(task) {
+  async createTask(task) {
     const result = await this.database.query(
       'INSERT INTO tasks (title, description, state, priority, teamId, userId) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',
       [
