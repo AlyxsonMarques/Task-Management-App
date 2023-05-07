@@ -6,8 +6,8 @@ class TeamUseCases {
   }
 
   async createTeam(name, members, administrators) {
-    const team = new Team(name, members, administrators)
-    return this.teamRepository.create(team)
+    const team = new Team(undefined, name, members, administrators)
+    return this.teamRepository.createTeam(team)
   }
 
   async getAllTeams() {
@@ -25,11 +25,11 @@ class TeamUseCases {
     oldTeam.members = members || oldTeam.members
     oldTeam.administrators = administrators || oldTeam.administrators
 
-    return this.teamRepository.update(oldTeam)
+    return this.teamRepository.updateTeam(oldTeam)
   }
 
   async deleteTeam(id) {
-    return this.teamRepository.delete(id)
+    return this.teamRepository.deleteTeam(id)
   }
 }
 

@@ -72,6 +72,7 @@ class taskRepository {
         task.user,
       ]
     )
+
     return new Task(
       result.rows[0]?.id,
       result.rows[0]?.title,

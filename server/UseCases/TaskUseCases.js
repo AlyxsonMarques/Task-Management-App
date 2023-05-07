@@ -18,8 +18,16 @@ class TaskUseCases {
   }
 
   async createTask(title, description, state, priority, team, user) {
-    const task = new Task(title, description, state, priority, team, user)
-    return this.taskRepository.create(task)
+    const task = new Task(
+      undefined,
+      title,
+      description,
+      state,
+      priority,
+      team,
+      user
+    )
+    return this.taskRepository.createTask(task)
   }
 
   async updateTask(id, title, description, state, priority, team, user) {

@@ -5,8 +5,8 @@ class UserUseCases {
     this.userRepository = userRepository
   }
 
-  async createUser(name, password) {
-    const userEntity = new User(name, password)
+  async createUser(email, password) {
+    const userEntity = new User(undefined, email, password)
     return this.userRepository.createUser(userEntity)
   }
 

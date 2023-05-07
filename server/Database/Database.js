@@ -20,6 +20,7 @@ class Database {
       return result
     } catch (error) {
       console.log('Database.js Level Error')
+      console.log(error)
     }
   }
 }
