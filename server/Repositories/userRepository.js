@@ -51,6 +51,19 @@ class userRepository {
     )
   }
 
+  async getUserByEmail(email) {
+    const result = await this.database.query(
+      'SELECT * FROM users WHERE email = $1',
+      [email]
+    )
+
+    return new User(
+      result.rows[0]?.id,
+      result.rows[0]?.email,
+      result.rows[0]?.password
+    )
+  }
+
   async updateUser(user) {
     const result = await this.database.query(
       'UPDATE users SET email = $1, password = $2 WHERE id = $3 RETURNING *',

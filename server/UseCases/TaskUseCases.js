@@ -13,6 +13,10 @@ class TaskUseCases {
     return this.taskRepository.getAll()
   }
 
+  async getTasksByUserId(id) {
+    return this.taskRepository.getTasksByUserId(id)
+  }
+
   async getTaskById(id) {
     return this.taskRepository.getTaskById(id)
   }

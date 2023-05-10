@@ -27,7 +27,7 @@ class taskRepository {
 
   async getAll() {
     const result = await this.database.query('SELECT * FROM tasks')
-    const tasks = result.rows.map(
+    return result.rows.map(
       (task) =>
         new Task(
           task.id,
@@ -40,7 +40,6 @@ class taskRepository {
           task.user
         )
     )
-    return tasks
   }
 
   async getTaskById(id) {
@@ -48,7 +47,7 @@ class taskRepository {
       'SELECT * FROM tasks WHERE id = $1',
       [id]
     )
-    return new Task(
+    const task = new Task(
       result.rows[0]?.id,
       result.rows[0]?.title,
       result.rows[0]?.description,
@@ -57,6 +56,28 @@ class taskRepository {
       result.rows[0]?.priority,
       result.rows[0]?.team,
       result.rows[0]?.user
+    )
+
+    return task
+  }
+
+  async getTasksByUserId(id) {
+    const result = await this.database.query(
+      'SELECT * FROM tasks WHERE userId = $1',
+      [id]
+    )
+    return result.rows.map(
+      (task) =>
+        new Task(
+          task.id,
+          task.title,
+          task.description,
+          task.state,
+          task.creationDate,
+          task.priority,
+          task.team,
+          task.user
+        )
     )
   }
 

@@ -38,6 +38,10 @@ describe('User CRUD', () => {
     testUser = await userUseCases.createUser('foo@bar.com', 'foo')
     expect(testUser).toBeInstanceOf(User)
   })
+  it('Sign-in a user with email and password', async () => {
+    testUserToken = await userUseCases.signIn('foo@bar.com', 'foo')
+    expect(typeof testUserToken).toBe('string')
+  })
   it('Get all users', async () => {
     expect(await userUseCases.getAllUsers()).toBeInstanceOf(Array)
   })
