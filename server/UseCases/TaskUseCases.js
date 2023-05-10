@@ -27,6 +27,7 @@ class TaskUseCases {
       title,
       description,
       state,
+      new Date(),
       priority,
       team,
       user

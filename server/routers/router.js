@@ -36,10 +36,24 @@ router.route('/signin').post(async (req, res) => {
   }
 })
 
-router.route('/tasks').get(authenticateJwt, async (req, res) => {
-  const userId = req.id
-  const tasks = await taskUseCases.getTasksByUserId(userId)
-  res.status(200).json(tasks)
-})
+router
+  .route('/tasks')
+  .post(authenticateJwt, async (req, res) => {
+    const userId = req.id
+    const task = await taskUseCases.createTask(
+      req.body.title,
+      req.body.description,
+      req.body.state,
+      req.body.priority,
+      req.body.team,
+      userId
+    )
+    res.status(201).json(task)
+  })
+  .get(authenticateJwt, async (req, res) => {
+    const userId = req.id
+    const tasks = await taskUseCases.getTasksByUserId(userId)
+    res.status(200).json(tasks)
+  })
 
 module.exports = router
