@@ -1,3 +1,5 @@
+const dotenv = require('dotenv').config()
+
 const express = require('express')
 const router = express.Router()
 
@@ -37,7 +39,7 @@ router.route('/signin').post(async (req, res) => {
 })
 
 router
-  .route('/tasks')
+  .route('/me/tasks')
   .post(authenticateJwt, async (req, res) => {
     const userId = req.id
     const task = await taskUseCases.createTask(
@@ -90,6 +92,59 @@ router
     const task = await taskUseCases.deleteTask(req.body.id)
 
     res.status(200).json(task)
+  })
+
+router
+  .route('/me/teams')
+  .post(authenticateJwt, (req, res) => {
+    const userId = req.id
+    const team = teamUseCases.createTeam(req.body.name, [userId], [userId])
+    if (!team) {
+      res.status(501).json({
+        msg: 'Server-side error',
+      })
+    }
+    res.status(201).json(team)
+  })
+  .get(authenticateJwt, (req, res) => {
+    const userId = req.id
+    const teams = teamUseCases.getTeamsByUserId([userId])
+    if (!teams) {
+      res.status(404).json({
+        msg: 'No teams found for user',
+      })
+    }
+    res.status(200).json(teams)
+  })
+  .patch(authenticateJwt, (req, res) => {
+    const userId = req.id
+    const oldTeam = teamUseCases.getTeamById(req.body.id)
+
+    if (!oldTeam.administrators.includes(userId)) {
+      res.status(401).json({
+        msg: 'You are not authorized to perform this action',
+      })
+    } else {
+      const team = teamUseCases.updateTeam(
+        req.body.id,
+        req.body.name,
+        req.body.administrators
+      )
+      res.status(200).json(team)
+    }
+  })
+  .delete(authenticateJwt, (req, res) => {
+    const userId = req.id
+    const oldTeam = teamUseCases.getTeamById(req.body.id)
+
+    if (!oldTeam.administrators.includes(userId)) {
+      res.status(401).json({
+        msg: 'You are not authorized to perform this action',
+      })
+    } else {
+      const team = teamUseCases.deleteTeam(req.body.id)
+      res.status(200).json(team)
+    }
   })
 
 module.exports = router

@@ -14,6 +14,10 @@ class TeamUseCases {
     return this.teamRepository.getAllTeams()
   }
 
+  async getTeamsByUserId(id) {
+    return this.teamRepository.getTeamsByUserId(id)
+  }
+
   async getTeamById(id) {
     return this.teamRepository.getTeamById(id)
   }

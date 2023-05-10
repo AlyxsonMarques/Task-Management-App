@@ -66,6 +66,9 @@ describe('Team CRUD', () => {
   it('Get all teams', async () => {
     expect(await teamUseCases.getAllTeams()).toBeInstanceOf(Array)
   })
+  it('Get teams by user id', async () => {
+    expect(await teamUseCases.getTeamsByUserId([39])).toBeInstanceOf(Array)
+  })
   it('Get team by id', async () => {
     expect(await teamUseCases.getTeamById(testTeam.id)).toBeInstanceOf(Team)
   })

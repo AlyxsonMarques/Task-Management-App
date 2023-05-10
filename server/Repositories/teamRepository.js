@@ -53,6 +53,18 @@ class teamRepository {
     )
   }
 
+  async getTeamsByUserId(id) {
+    const result = await this.database.query(
+      `SELECT * FROM teams WHERE $1 IN (members, administrators)`,
+      [id]
+    )
+
+    return result.rows.map(
+      (team) =>
+        new Team(team?.id, team?.name, team?.members, team?.administrators)
+    )
+  }
+
   async updateTeam(team) {
     const result = await this.database.query(
       `UPDATE teams SET name = $1, members = $2, administrators = $3 WHERE id = $4`,
