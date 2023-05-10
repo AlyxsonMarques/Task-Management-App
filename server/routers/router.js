@@ -55,5 +55,41 @@ router
     const tasks = await taskUseCases.getTasksByUserId(userId)
     res.status(200).json(tasks)
   })
+  .patch(authenticateJwt, async (req, res) => {
+    const userId = req.id
+
+    const oldTask = await taskUseCases.getTaskById(req.body.id)
+    if (oldTask.user !== userId) {
+      res.status(401).json({
+        msg: 'You are not authorized to perform this action',
+      })
+    }
+
+    const task = await taskUseCases.updateTask(
+      req.body.id,
+      req.body.title,
+      req.body.description,
+      req.body.state,
+      req.body.priority,
+      req.body.team,
+      req.body.user
+    )
+
+    res.status(200).json(task)
+  })
+  .delete(authenticateJwt, async (req, res) => {
+    const userId = req.id
+
+    const oldTask = await taskUseCases.getTaskById(req.body.id)
+    if (oldTask.user !== userId) {
+      res.status(401).json({
+        msg: 'You are not authorized to perform this action',
+      })
+    }
+
+    const task = await taskUseCases.deleteTask(req.body.id)
+
+    res.status(200).json(task)
+  })
 
 module.exports = router
