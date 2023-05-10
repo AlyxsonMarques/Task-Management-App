@@ -81,6 +81,26 @@ class taskRepository {
     )
   }
 
+  async getTasksByTeamId(id) {
+    const result = await this.database.query(
+      'SELECT * FROM tasks WHERE teamId = $1',
+      [id]
+    )
+    return result.rows.map(
+      (task) =>
+        new Task(
+          task.id,
+          task.title,
+          task.description,
+          task.state,
+          task.creationDate,
+          task.priority,
+          task.team,
+          task.user
+        )
+    )
+  }
+
   async createTask(task) {
     const result = await this.database.query(
       'INSERT INTO tasks (title, description, state, priority, teamId, userId) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *',

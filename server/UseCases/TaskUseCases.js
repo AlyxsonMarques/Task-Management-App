@@ -17,6 +17,10 @@ class TaskUseCases {
     return this.taskRepository.getTasksByUserId(id)
   }
 
+  async getTasksByTeamId(id) {
+    return this.taskRepository.getTasksByTeamId(id)
+  }
+
   async getTaskById(id) {
     return this.taskRepository.getTaskById(id)
   }
