@@ -1,2 +1,36 @@
-# Task-Management-App
-Projeto onde usuários poderão gerenciar tarefas para sí, e em times.
+# Task Management
+
+Gerenciador de Tarefas para Usuários em Times
+
+## Descrição
+
+Este projeto é uma aplicação desenvolvida em Node.js com as tecnologias pg, express e jwt, que tem como objetivo auxiliar times na gestão de suas tarefas. A aplicação possui rotas para cadastro e autenticação de usuários, listagem de tarefas e times, criação de tarefas e times e atribuição de tarefas a times específicos. 
+
+## Rotas
+
+- POST `/signup`: cria um novo usuário.
+- POST `/signin`: autentica o usuário e retorna um token JWT.
+- POST `/me/tasks`: cria uma nova tarefa associada ao usuário autenticado.
+- GET `/me/tasks`: retorna todas as tarefas associadas ao usuário autenticado.
+- PATCH `/me/tasks`: atualiza uma tarefa existente associada ao usuário autenticado.
+- DELETE `/me/tasks`: exclui uma tarefa existente associada ao usuário autenticado.
+- POST `/me/teams`: cria uma nova equipe associada ao usuário autenticado.
+- GET `/me/teams`: retorna todas as equipes associadas ao usuário autenticado.
+- PATCH `/me/teams`: atualiza uma equipe existente associada ao usuário autenticado.
+- DELETE `/me/teams`: exclui uma equipe existente associada ao usuário autenticado.
+- POST `/me/teams/:teamId/tasks`: cria uma nova tarefa associada a uma equipe, e o usuário autenticado deve ser um membro dessa equipe.
+
+## Tecnologias
+
+- Node.js
+- pg
+- express
+- jwt
+
+## Licença
+
+Este projeto está licenciado sob a Licença MIT - consulte o arquivo [LICENSE.md](LICENSE.md) para obter mais detalhes.
+
+## Autor
+
+Alyxson Marques
