@@ -27,6 +27,33 @@ Este projeto é uma aplicação desenvolvida em Node.js com as tecnologias pg, e
 - express
 - jwt
 
+## Instalação
+1- Clone o repositório.
+2- Rode o comando npm install na pasta raiz do projeto.
+3- Crie um arquivo .env na raiz do projeto e configure as variáveis de ambiente necessárias:
+
+PORT=4000
+
+DB_HOST='localhost'
+DB_PORT=5432
+DB_PASS='your_db_pass'
+DB_NAME='taskmanagement'
+
+JWT_SECRET='your_jwt_secret'
+
+4- Rode o comando npm start para iniciar o servidor.
+5- Rode o comando npm t para executar os testes unitários.
+
+## Contribuição
+
+Se você quiser contribuir com este projeto, por favor siga as orientações abaixo:
+
+Faça um fork do repositório.
+Crie uma nova branch (git checkout -b feature/nome-da-sua-feature).
+Faça as suas modificações e faça commit (git commit -m "Adicionando uma nova funcionalidade").
+Faça push na sua branch (git push origin feature/nome-da-sua-feature).
+Abra um Pull Request.
+
 ## Licença
 
 Este projeto está licenciado sob a Licença MIT - consulte o arquivo [LICENSE.md](LICENSE.md) para obter mais detalhes.
