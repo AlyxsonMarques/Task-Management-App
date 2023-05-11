@@ -28,10 +28,10 @@ Este projeto é uma aplicação desenvolvida em Node.js com as tecnologias pg, e
 - jwt
 
 ## Instalação
-1- Clone o repositório.
-2- Rode o comando npm install na pasta raiz do projeto.
-3- Crie um arquivo .env na raiz do projeto e configure as variáveis de ambiente necessárias:
-
+1. Clone o repositório.
+2. Rode o comando npm install na pasta raiz do projeto.
+3. Crie um arquivo .env na raiz do projeto e configure as variáveis de ambiente necessárias:
+```
 PORT=4000
 
 DB_HOST='localhost'
@@ -40,9 +40,9 @@ DB_PASS='your_db_pass'
 DB_NAME='taskmanagement'
 
 JWT_SECRET='your_jwt_secret'
-
-4- Rode o comando npm start para iniciar o servidor.
-5- Rode o comando npm t para executar os testes unitários.
+```
+4. Rode o comando npm start para iniciar o servidor.
+5. Rode o comando npm t para executar os testes unitários.
 
 ## Contribuição
 
