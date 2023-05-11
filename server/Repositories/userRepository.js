@@ -9,7 +9,7 @@ class userRepository {
     const resultUserTable = await this.database.query(
       `CREATE TABLE IF NOT EXISTS users (
       id SERIAL PRIMARY KEY NOT NULL, 
-      email VARCHAR(20) NOT NULL, 
+      email UNIQUE VARCHAR(20) NOT NULL, 
       password VARCHAR(20) NOT NULL
      )`
     )

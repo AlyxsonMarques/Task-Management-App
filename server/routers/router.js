@@ -42,6 +42,7 @@ router
   .route('/me/tasks')
   .post(authenticateJwt, async (req, res) => {
     const userId = req.id
+    console.log(userId)
     const task = await taskUseCases.createTask(
       req.body.title,
       req.body.description,

@@ -17,7 +17,7 @@ class taskRepository {
       creationDate DATE DEFAULT CURRENT_DATE NOT NULL, 
       priority VARCHAR(20) NOT NULL, 
       teamId INT, 
-      userId INT, 
+      userId INT NOT NULL, 
       CONSTRAINT fk_team FOREIGN KEY(teamId) REFERENCES teams(id) ON DELETE SET NULL, 
       CONSTRAINT fk_user FOREIGN KEY(userId) REFERENCES users(id) ON DELETE SET NULL
     )`
